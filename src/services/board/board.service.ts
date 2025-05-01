@@ -6,10 +6,9 @@ import { Board } from '../../classes';
 })
 export class BoardService {
 
-  public getInitialBoard(): Board {
-    const board = new Board();
-    return board
-      .initializeWhite()
-      .initializeBlack();
+  public board: Board = new Board();
+
+  constructor() {
+    this.board = this.board.initializePieces();
   }
 }

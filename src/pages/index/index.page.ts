@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { ChessBoardComponent } from '../../components/chess-board/chess-board.component';
 
 @Component({

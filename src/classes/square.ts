@@ -7,8 +7,8 @@ export class Square {
   public piece: Piece | null = null;
 
   constructor(
-    public row: number, 
-    private _col: number, 
+    public row: number,
+    private _col: number,
     public color: 'black' | 'white'
   ) {}
 
@@ -17,4 +17,6 @@ export class Square {
   public get isLeftEdge(): boolean { return this._col === 1; }
 
   public get isBottomEdge(): boolean { return this.row === 8; }
+
+  public get isClickable(): boolean { return !!this.piece }
 }

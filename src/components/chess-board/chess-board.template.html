@@ -1,11 +1,12 @@
-<div class="border-4 relative rounded-lg">
-  <div class="w-80 h-80 grid grid-cols-8">
+<div class="border-4 border-black relative">
+  <div class="w-160 h-160 grid grid-cols-8">
     @for (row of board().squares; let rowIdx = $index; track rowIdx) {
       @for (square of row; let colIdx = $index; track colIdx) {
-        <div class="h-10 w-10 flex items-center justify-center" 
-             [class]="{ 
-              'bg-gray-500': square.color === 'black',
-              'bg-gray-300': square.color === 'white' 
+        <div class="h-20 w-20 flex items-center justify-center"
+             [ngClass]="{
+              'bg-gray-400': square.color === 'white',
+              'bg-gray-600': square.color === 'black',
+              'cursor-pointer hover:bg-blue-400': square.isClickable,
              }">
           @if (square.isLeftEdge) {
             <span class="absolute -left-4 text-gray-500 font-medium text-[10px]">{{ square.row }}</span>
@@ -16,13 +17,13 @@
           }
 
           @if (square.piece) {
-            <span class="font-bold text-xs"
-                  [class]="{ 
-                    'text-black': square.piece.color === 'black',
-                    'text-white': square.piece.color === 'white'  
-                  }">
-              {{ square.piece.icon }}
-            </span>
+            <fa-icon [icon]="square.piece.icon!"
+                     [fixedWidth]="true"
+                     class="font-bold text-3xl"
+                     [ngClass]="{
+                        'text-black': square.piece.color === 'black',
+                        'text-white': square.piece.color === 'white'
+                     }"/>
           }
         </div>
       }

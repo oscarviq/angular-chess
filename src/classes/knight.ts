@@ -1,10 +1,10 @@
 import { Piece } from './piece';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { faChessPawn } from '@fortawesome/free-solid-svg-icons';
+import { faChessKnight } from '@fortawesome/free-solid-svg-icons';
 
-export class Pawn extends Piece {
+export class Knight extends Piece {
 
-  public override readonly icon: IconDefinition = faChessPawn;
+  public override readonly icon: IconDefinition = faChessKnight;
 
   constructor(color: 'black' | 'white') {
     super(color);

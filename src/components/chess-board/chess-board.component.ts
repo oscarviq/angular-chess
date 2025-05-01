@@ -1,5 +1,6 @@
 import { Component, inject, signal, Signal } from '@angular/core';
-import { FontAswesomeModule } from '@fortawesome/angular-fontawesome';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { Board } from '../../classes';
 import { BoardService } from '../../services';
@@ -7,7 +8,8 @@ import { BoardService } from '../../services';
 @Component({
   selector: 'chess-board',
   imports: [
-    FontAswesomeModule
+    CommonModule,
+    FontAwesomeModule
   ],
   providers: [
     BoardService,
@@ -15,12 +17,6 @@ import { BoardService } from '../../services';
   templateUrl: './chess-board.template.html',
 })
 export class ChessBoardComponent {
-
   public boardService: BoardService = inject(BoardService);
-
-  public board: Signal<Board> = signal(this.boardService.getInitialBoard());
-
-  constructor() {
-    console.log(this.board());
-  }
+  public board: Signal<Board> = signal(this.boardService.board);
 }
