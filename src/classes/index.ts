@@ -1,6 +1,5 @@
 export * from './board';
 export * from './square';
-export * from './piece';
 export * from './pawn';
 export * from './rook';
 export * from './knight';

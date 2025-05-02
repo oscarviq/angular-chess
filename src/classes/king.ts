@@ -1,12 +1,15 @@
-import { Piece } from './piece';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faChessKing } from '@fortawesome/free-solid-svg-icons';
 
-export class King extends Piece {
+import { PieceInterface } from '../interfaces';
+import { Color } from '../types';
 
-  public override readonly icon: IconDefinition = faChessKing;
+export class King implements PieceInterface {
 
-  constructor(color: 'black' | 'white') {
-    super(color);
-  }
+  public readonly name: string = 'King';
+  public readonly icon: IconDefinition = faChessKing;
+
+  constructor(
+    public readonly color: Color
+  ) {}
 }

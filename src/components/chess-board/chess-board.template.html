@@ -1,32 +1,62 @@
-<div class="border-4 border-black relative">
-  <div class="w-160 h-160 grid grid-cols-8">
-    @for (row of board().squares; let rowIdx = $index; track rowIdx) {
-      @for (square of row; let colIdx = $index; track colIdx) {
-        <div class="h-20 w-20 flex items-center justify-center"
-             [ngClass]="{
-              'bg-gray-400': square.color === 'white',
-              'bg-gray-600': square.color === 'black',
-              'cursor-pointer hover:bg-blue-400': square.isClickable,
-             }">
-          @if (square.isLeftEdge) {
-            <span class="absolute -left-4 text-gray-500 font-medium text-[10px]">{{ square.row }}</span>
-          }
-
-          @if (square.isBottomEdge) {
-            <span class="absolute -bottom-5.5 text-gray-500 font-medium text-[10px]">{{ square.col }}</span>
-          }
-
-          @if (square.piece) {
-            <fa-icon [icon]="square.piece.icon!"
-                     [fixedWidth]="true"
-                     class="font-bold text-3xl"
-                     [ngClass]="{
-                        'text-black': square.piece.color === 'black',
-                        'text-white': square.piece.color === 'white'
-                     }"/>
-          }
+<div class="hero">
+    <div class="hero-content text-center">
+        <div class="max-w-md">
+            <h1 class="text-5xl font-bold">Its {{ activeTurn() }}'s turn! </h1>
         </div>
-      }
-    }
-  </div>
+    </div>
+</div>
+
+<div class="card bg-amber-950">
+
+    <div class="card-body">
+
+        <div class="w-120 h-120 grid grid-cols-8 relative">
+
+            @for (row of board().squares; let rowIdx = $index; track rowIdx) {
+
+                @for (square of row; let colIdx = $index; track colIdx) {
+
+                    <div class="h-15 w-15 flex items-center justify-center"
+                         [ngClass]="{
+                          'bg-gray-400': square.color === 'white',
+                          'bg-gray-700': square.color === 'black',
+                          'bg-yellow-400': activeSquare() === square,
+                          'hover:bg-blue-400': boardService.isSquareClickable(square) && activeSquare() !== square,
+                          'cursor-pointer': activeSquare() === square || boardService.isSquareClickable(square)
+                         }">
+                        @if (isSquareAtLeftEdge(square)) {
+                            <span class="absolute -left-4 text-amber-700 font-medium text-[10px]">{{ square.row + 1 }}</span>
+                        }
+
+                        @if (isSquareAtBottomEdge(square)) {
+                            <span class="absolute -bottom-5 text-amber-700 font-medium text-[10px]">{{ square.colLetter }}</span>
+                        }
+
+                        @if (square.piece) {
+                            <div class="tooltip" (click)="boardService.setActiveSquare(square)">
+                                <div class="tooltip-content">
+                                    <span class="text-[9px]">
+                                        <strong>{{ square.piece.name | uppercase }}</strong>
+                                        &#64; {{ square.colLetter }}{{ square.row + 1 }}
+                                    </span>
+                                </div>
+                                <fa-icon [icon]="square.piece.icon!"
+                                         [fixedWidth]="true"
+                                         class="font-bold text-3xl"
+                                         [ngClass]="{
+                                            'text-black': square.piece.color === 'black',
+                                            'text-white': square.piece.color === 'white'
+                                         }"/>
+                            </div>
+                        }
+                    </div>
+
+                }
+
+            }
+
+        </div>
+
+    </div>
+
 </div>

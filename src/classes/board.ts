@@ -1,3 +1,4 @@
+import { Color } from '../types';
 import { Square } from './square';
 import { Rook } from './rook';
 import { Knight } from './knight';
@@ -13,13 +14,13 @@ export class Board {
   constructor () {
     this.squares = Array.from({ length: 8 }, (_, row) =>
       Array.from({ length: 8 }, (_, col) =>
-        new Square(row + 1, col + 1, (row + col) % 2 === 1 ? 'black' : 'white')
+        new Square(7 - row, col, (row + col) % 2 === 1 ? 'black' : 'white')
       )
     );
   }
 
   public initializePieces(): Board {
-    const colors: ['white', 'black'] = ['white', 'black'];
+    const colors: Color[] = ['white', 'black'];
     const colorRows = [[6, 7], [0,1]];
 
     const rookPositions = [0, 7];
@@ -28,7 +29,7 @@ export class Board {
     const queenPosition = 3;
     const kingPosition = 4;
 
-    colors.forEach((color: 'white' | 'black', colorIndex: number) => {
+    colors.forEach((color: Color, colorIndex: number) => {
       const pawnsRow = color === 'white' ? 6 : 1;
 
       colorRows[colorIndex].forEach((row: number) => {
